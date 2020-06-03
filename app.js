@@ -10,66 +10,85 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const questions = [
+// const questions =
 
-    {
-        type: "input",
-        message: "What is your employees name?",
-        name: "name"
-    },
-
-    {
-        type: "input",
-        message: "What is your employees ID number?",
-        name: "employeeId"
-    },
-
-    {
-        type: "input",
-        message: "What is your employees role?",
-        name: "role"
-    },
-
-    {
-        type: "input",
-        message: "What is your employees email address??",
-        name: "email"
-    },
-
-    {
-        type: "input",
-        message: "What is your employees GitHub?",
-        name: "GitHub"
-    },
-
-    {
-        type: "input",
-        message: "Where did your intern go to school?",
-        name: "school"
-    },
-
-    {
-        type: "list",
-        message: "What's your employees role?",
-        choices: [
-            "a: Manager",
-            "b: Engineer",
-            "c: Intern",
-        ],
-        name: "role"
-    }
-];
-
-function init() {
+function askQuestions() {
 
     inquirer
-        .prompt(questions)
-        .then( function (data){
+        .prompt([
+
+            {
+                type: "input",
+                message: "What is your role?",
+                name: "role"
+            },
+        
+            {
+                type: "input",
+                message: "What is your name?",
+                name: "name"
+            },
+
+            {
+                type: "input",
+                message: "What is your office number?",
+                name: "officeNumber"
+            },
+        
+            {
+                type: "confirm",
+                message: "Would you like to add another team member?",
+                name: "addTeam",
+        
+            },
+        
+            {
+                type: "list",
+                message: "What's your employees role?",
+                name: "role",
+                choices: [
+                    "Engineer",
+                    "Intern",
+                ],
+                
+            },
+        
+            {
+                type: "input",
+                message: "What is your employees ID number?",
+                name: "employeeId"
+            },
+        
+            {
+                type: "input",
+                message: "What is your employees email address??",
+                name: "email"
+            },
+        
+            {
+                type: "input",
+                message: "What is your employees GitHub?",
+                name: "GitHub"
+            },
+        
+            {
+                type: "input",
+                message: "Where did your intern go to school?",
+                name: "school"
+            }
+        
+        ])
+        .then(function (data){
+            switch(data) {
+                case "A":
+                    optionA();
+                    break;
+            }
             console.log(data);
         })
 };
 
-init();
+askQuestions();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
