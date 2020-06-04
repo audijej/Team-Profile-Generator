@@ -11,6 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 // const questions =
+let addEmployee = true;
 
 function askQuestions() {
 
@@ -37,7 +38,7 @@ function askQuestions() {
         
             {
                 type: "confirm",
-                message: "Would you like to add another team member?",
+                message: `Would you like to add another ${addEmployee} team member?`,
                 name: "addTeam",
         
             },
@@ -53,40 +54,84 @@ function askQuestions() {
                 
             },
         
+        ])
+        .then(function (data){
+            addEmployee = true;
+            switch(data.role) {
+                case "Engineer":
+                    addEngineer();
+                    break;
+                case "Intern":
+                    addIntern();
+                    break;
+            }
+            // console.log(data);
+        })
+};
+
+function addEngineer() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is your employees name?",
+                name: "name"
+            },
+            
             {
                 type: "input",
                 message: "What is your employees ID number?",
                 name: "employeeId"
             },
-        
+
             {
                 type: "input",
                 message: "What is your employees email address??",
                 name: "email"
             },
-        
+
             {
                 type: "input",
                 message: "What is your employees GitHub?",
                 name: "GitHub"
             },
-        
+        ])
+        .then(function (data) {
+            console.log("software engineers are cool")
+        })
+}
+
+function addIntern() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is your interns name?",
+                name: "name"
+            },
+            
+            {
+                type: "input",
+                message: "What is your interns ID number?",
+                name: "employeeId"
+            },
+
+            {
+                type: "input",
+                message: "What is your interns email address??",
+                name: "email"
+            },
+
             {
                 type: "input",
                 message: "Where did your intern go to school?",
                 name: "school"
             }
-        
         ])
-        .then(function (data){
-            switch(data) {
-                case "A":
-                    optionA();
-                    break;
-            }
-            console.log(data);
+        .then(function (data) {
+            console.log("cool you have an intern")
         })
-};
+}
 
 askQuestions();
 
