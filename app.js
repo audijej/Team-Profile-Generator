@@ -13,7 +13,7 @@ const render = require("./lib/htmlRenderer");
 // const questions =
 let addEmployee = true;
 
-function askQuestions() {
+function managerQuestions() {
 
     inquirer
         .prompt([
@@ -23,7 +23,7 @@ function askQuestions() {
                 message: "What is your role?",
                 name: "role"
             },
-        
+
             {
                 type: "input",
                 message: "What is your name?",
@@ -35,14 +35,63 @@ function askQuestions() {
                 message: "What is your office number?",
                 name: "officeNumber"
             },
-        
+
             {
-                type: "confirm",
+                type: "list",
                 message: `Would you like to add another ${addEmployee} team member?`,
                 name: "addTeam",
-        
+                choices: [
+                    "Yes",
+                    "No"
+                ]
             },
-        
+
+        ]).then(function (data) {
+            addEmployee = true;
+            console.log(data.addTeam);
+            switch (data.addTeam) {
+                case "Yes":
+                    employeeRole();
+                    break;
+                case "No":
+                    console.log("Ok thanks")
+            }
+            console.log(data);
+
+        })
+};
+
+function addAnotherTeamMember () {
+    inquirer
+        .prompt([
+
+            {
+                type: "list",
+                message: `Would you like to add another ${addEmployee} team member?`,
+                name: "addTeam",
+                choices: [
+                    "Yes",
+                    "No"
+                ]
+            }, 
+        ]).then(function (data) {
+            addEmployee = true;
+            console.log(data.addTeam);
+            switch (data.addTeam) {
+                case "Yes":
+                    employeeRole();
+                    break;
+                case "No":
+                    console.log("Ok thanks")
+            }
+            console.log(data);
+
+        })
+}
+
+function employeeRole() {
+    inquirer
+        .prompt([
             {
                 type: "list",
                 message: "What's your employees role?",
@@ -50,24 +99,25 @@ function askQuestions() {
                 choices: [
                     "Engineer",
                     "Intern",
+                    "None"
                 ],
-                
+
             },
-        
-        ])
-        .then(function (data){
+        ]).then(function (data) {
             addEmployee = true;
-            switch(data.role) {
+            switch (data.role) {
                 case "Engineer":
                     addEngineer();
                     break;
                 case "Intern":
                     addIntern();
                     break;
+                case "None":
+                    console.log("Ok thanks")
             }
-            // console.log(data);
+            console.log(data);
         })
-};
+}
 
 function addEngineer() {
     inquirer
@@ -77,7 +127,7 @@ function addEngineer() {
                 message: "What is your employees name?",
                 name: "name"
             },
-            
+
             {
                 type: "input",
                 message: "What is your employees ID number?",
@@ -98,6 +148,7 @@ function addEngineer() {
         ])
         .then(function (data) {
             console.log("software engineers are cool")
+            addAnotherTeamMember();
         })
 }
 
@@ -109,7 +160,7 @@ function addIntern() {
                 message: "What is your interns name?",
                 name: "name"
             },
-            
+
             {
                 type: "input",
                 message: "What is your interns ID number?",
@@ -130,10 +181,11 @@ function addIntern() {
         ])
         .then(function (data) {
             console.log("cool you have an intern")
+            addAnotherTeamMember();
         })
 }
 
-askQuestions();
+managerQuestions();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
