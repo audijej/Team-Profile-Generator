@@ -11,7 +11,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 // const questions =
-let addEmployee = true;
+
+let profile = []
 
 function managerQuestions() {
 
@@ -37,8 +38,14 @@ function managerQuestions() {
             },
 
             {
+                type: "input",
+                message: "What is your email address??",
+                name: "email"
+            },
+
+            {
                 type: "list",
-                message: `Would you like to add another ${addEmployee} team member?`,
+                message: `Would you like to add another team member?`,
                 name: "addTeam",
                 choices: [
                     "Yes",
@@ -47,17 +54,18 @@ function managerQuestions() {
             },
 
         ]).then(function (data) {
-            addEmployee = true;
-            console.log(data.addTeam);
+            let manager = new Manager(data.role, data.name, data.email, data.officeNumber);
             switch (data.addTeam) {
                 case "Yes":
                     employeeRole();
+                    profile.push(manager);
                     break;
                 case "No":
-                    console.log("Ok thanks")
+                    console.log("Ok thanks");
+                    console.log(profile);
+                    
             }
-            console.log(data);
-
+            
         })
 };
 
@@ -67,7 +75,7 @@ function addAnotherTeamMember () {
 
             {
                 type: "list",
-                message: `Would you like to add another ${addEmployee} team member?`,
+                message: `Would you like to add another team member?`,
                 name: "addTeam",
                 choices: [
                     "Yes",
@@ -75,17 +83,15 @@ function addAnotherTeamMember () {
                 ]
             }, 
         ]).then(function (data) {
-            addEmployee = true;
             console.log(data.addTeam);
             switch (data.addTeam) {
                 case "Yes":
                     employeeRole();
                     break;
                 case "No":
+                    generateHtml();
                     console.log("Ok thanks")
             }
-            console.log(data);
-
         })
 }
 
@@ -113,6 +119,7 @@ function employeeRole() {
                     addIntern();
                     break;
                 case "None":
+                    generateHtml();
                     console.log("Ok thanks")
             }
             console.log(data);
@@ -147,8 +154,12 @@ function addEngineer() {
             },
         ])
         .then(function (data) {
-            console.log("software engineers are cool")
+            let engineer = new Engineer (data.name, data.employeeId, data.email, data.GitHub);
+            profile.push(engineer);
+            console.log("software engineers are cool");
+            console.log(engineer);
             addAnotherTeamMember();
+            
         })
 }
 
@@ -180,12 +191,21 @@ function addIntern() {
             }
         ])
         .then(function (data) {
-            console.log("cool you have an intern")
+            let intern = new Intern (data.name, data.employeeId, data.email, data.school);
+            profile.push(intern);
+            console.log("cool you have an intern");
+            console.log(intern);
             addAnotherTeamMember();
         })
 }
 
+function generateHtml(){
+    fs.writeFileSync(outputPath, render(profile), "utf-8")
+}
+
 managerQuestions();
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
