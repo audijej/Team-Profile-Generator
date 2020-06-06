@@ -16,16 +16,17 @@
 
 ## Description
 
-This is a simple to use and convenient application that allows users to generate a simple markdown file. This markdown file can be a great addition to a repository's readme section. All that is required from the user is to simply run npm install, answer the questions, copy the generated markdown file, and paste it to their project. The simplicity of this application allows the user to focus more on the content of their readme file rather than how to create a framework for their markdown file.
+This application allows a manager or supervisor to create a roster of their team members. The application runs from the command line and generates a series of questions that is tailored to the position that the employee holds, their employee ID, their email, their github account and their school. Once all the questions have been answered and the manager/supervisor no longer wants to add a team member, the input collected from the command line will generate an HTML file that organizes that specific team roster.
 
 ## Application
 
 -npm install\
--adding an image is recommended
+-Adding an image is recommended\
+-Adding a CSS file for customization
 
 ## Usage
 
-The user can use the application by simply running an npm install from their command line. Once installed, the user can then run "node index.js" and a series of prompted questions will populate the command line. The user can then answer the prompted questions as needed to narrate their proposed project. Once the answers have been provided, then application will generate a markdown sheet called "README.md". The user can then copy this markdown file and attach it to the project they intend to use it for. The user can then push this markdown file to GitHub and will and all the format will be reflected onto the readme section.
+The user can use the application by simply running an npm install from their command line. Once installed, the user can then run "node app.js" and a series of prompted questions will populate the command line. The user can decide whether to add an engineer or an intern. The user can then answer the prompted questions that are specific to the team members role. Once the answers have been provided, then application will generate an html file called "team.html". The "team.html" file uses a series of templates within the program to complile the team roster. This file will consist of all the input from the prompted questions. Additional css styling can be added through the "style.css" file that is located in the output folder.
 
 ![alt text](./templates/TeamProfileGeneratorDemo.gif)
 
