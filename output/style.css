@@ -1,0 +1,58 @@
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.jumbotron {
+    background-color: black;
+}
+
+.card {
+    padding: 20px;
+    border: white;
+}
+
+.card-header {
+    background-color: purple;
+    border: solid 2px black;
+}
+
+.card-body {
+    border: solid 2px black;
+
+}
+
+h1 {
+    font-size: 50px;
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    font-size: 30px;
+    color: white;
+}
+
+h3 {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin-top: auto;
+}
+
+.social-media-icon {
+    display: inline;
+    font-size: 30px;
+}

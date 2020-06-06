@@ -33,6 +33,12 @@ function managerQuestions() {
 
             {
                 type: "input",
+                message: "What is your employee ID number?",
+                name: "employeeId"
+            },
+
+            {
+                type: "input",
                 message: "What is your office number?",
                 name: "officeNumber"
             },
@@ -54,7 +60,7 @@ function managerQuestions() {
             },
 
         ]).then(function (data) {
-            let manager = new Manager(data.role, data.name, data.email, data.officeNumber);
+            let manager = new Manager(data.name, data.employeeId, data.email, data.officeNumber);
             switch (data.addTeam) {
                 case "Yes":
                     employeeRole();
